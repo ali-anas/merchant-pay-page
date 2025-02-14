@@ -1,7 +1,9 @@
 <html>
     <head>
+      <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://mercury-t2.phonepe.com frame-src: 'self' https://mercury-t2.phonepe.com"> -->
       <script type="text/javascript" src="https://mercury-stg.phonepe.com/transact/pay-init"></script>
-      </script>
+      <meta name="referrer" content="origin" />
+      <!-- </script> -->
       <style type="text/css">
       </style>
     </head>
@@ -92,7 +94,8 @@
 
             const submitBtn = document.getElementById("submitBtn");
             submitBtn.addEventListener('click', (e) => {
-                event.preventDefault();
+              alert("submit btn clicked");
+                e.preventDefault();
                 const tokenEle = document.getElementById("authToken");
                 console.log("token: ", tokenEle.value.trim());
                 if(widget) {
