@@ -94,10 +94,8 @@
 
             const submitBtn = document.getElementById("submitBtn");
             submitBtn.addEventListener('click', (e) => {
-              alert("submit btn clicked");
                 e.preventDefault();
                 const tokenEle = document.getElementById("authToken");
-                console.log("token: ", tokenEle.value.trim());
                 if(widget) {
                     widget.pay({
                         transactionToken: tokenEle.value.trim(),
