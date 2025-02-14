@@ -1,0 +1,110 @@
+<html>
+    <head>
+      <script type="text/javascript" src="https://mercury-stg.phonepe.com/transact/pay-init"></script>
+      </script>
+      <style type="text/css">
+      </style>
+    </head>
+    <body>
+      <h1>Widget</h1>
+      <form id="myForm">
+        <div class="card_number">
+        </div>
+        <div class="card_holder_name"></div>
+        <div class="card_expiry"></div>
+        <div class="card_cvv"></div>
+        <div style="margin-bottom: 16px"><input type="text" id="authToken" placeholder="transaction token" style="width: 400px; height: 42px"></div>
+        <button id="submitBtn">Submit</button>
+      </form>
+    </body>
+    <script>
+      window.onload = () => {
+            console.log("PARENT ORIGIN: ", window.location)
+            // Access the global widget instance
+            const widget = window.PhonepeWidget;
+
+            // Now you can use the widget, for example, call a method or update its config
+            if (widget) {
+                widget.init({
+                    layout_config: {
+                        form_id: 'myForm',
+                        iframe_containers: {
+                          card_number: {
+                            container: '.card_number',
+                            attributes: {
+                              placeholder: "4111 1111 1111 1111",
+                            }
+                          },
+                          card_holder_name: {
+                            container: '.card_holder_name',
+                            attributes: {
+                              placeholder: "Name on Card",
+                            }
+                          },
+                          card_expiry: {
+                            container: '.card_expiry',
+                            attributes: {
+                              placeholder: "MM / YY",
+                            }
+                          },
+                          card_cvv: { 
+                            container: '.card_cvv',
+                            attributes: {
+                              placeholder: "CVV",
+                            }
+                          }
+                        },
+                        styles: {
+                          "input": {
+                            outline: 'none',
+                            border: '2px solid black',
+                            padding: '8px 16px',
+                            "border-radius": '4px',
+                            height: '42px',
+                          },
+                          // common styles
+                        //   import fonts ...
+                          ".card_number": {
+                          }, 
+                          ".card_holder_name": {
+                          },
+                          ".card_expiry": {
+                          },
+                          ".card_cvv": {
+                          }, 
+                          ":focus": {
+                            border: '2px solid #2e90fa',
+                          },
+                        }
+                    },
+                    customer_config: {
+                      data_token: "abcd", 
+                    //   card_encryption_key: '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiNAFc6D1Fv/rCzYCwuzR\nBuj20geAo5pfK7ZwSTkiVl31J8FD+uI5QjNPHoHpcn09TFw1cohkRCaYkcwxJswG\nYN7mpMXG09UgXycYUe3wBHEp/BPpFUKLIFldz4+8O+/xaIpZ1kI70dYT7HAIh0JN\nmc5M91cbluUjVVlGMScpMrbKuNvIA4ci11WsFn1q0e87M41k+qmXXyTUVdJTgGpc\narByQpa9oemAESvTWj2i54jsfjuV+LvvjMcc9oBKkFkHFJx2A/r8pm2G0bmG9IYc\n+TD2CW9tpfoBdsBf5O1G4FckhLy3G8HyilCz5mniR9MwRViNoGtChZXQLMAW2cng\nkQIDAQAB\n-----END PUBLIC KEY-----',
+                        card_encryption_key: 'MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmj6Bri6mSOKz0gH7n+X4K5Thi9Jpqr71Kk1flA+V4+q0JxuMbNJRh9TR+6JMZiLCwyMerktUPPc7DCre48Ja9g3IUDSMpUZx1OATw00sNOazGzf/72xRS4vpEMhCMXJl31SR/nmbCS0p0qj1WR8ZKyh4QUOEkh/0OCqy6rqxjq1lJE/Heiz9O9Rk70WqsyU5gb7M5Xeng7ZlTT3OpPqgpzs6kue7azLjE3Rq3e178coib9Jo9eOsRX+LrAkaaY0bD05ur/08QTnEujFjbrc7rd4mZAU27QedkEAnLsPbBe9RikRtZSWfOCEGOMzAj5/vz40Xl4gg/MiFIv6cn4IBYFTYYL08h83wyX0BlSAisKRc9e1gea64EGBz/BBWh1f92IFbqRaxyFL5K5fAOhhkT0CehfozIm8XQz6tlgayxqLNSIStLnJtzGhpoWzsYF/uN0BMjPaPxif+sWXZm7en92kWVz2WBFo5uSGTnFM1iJrzpiVC9LUwD5EbQSjxFcYOxAgccHi60FVoGDpdNSJWIb76TBeFclQ1C9gDmEj8RUgxCHqaPJDls5HES2FygS8uB0zUHNdhnmuK0uyv8JbG7H8ZJmIsPXNTRW+u5IOmaskofcOEY8LOZERhhXXsZh4WEKOtL0/zBGfi3uSIl/CpwrNdChqnIsfFLfo9qT1jcB8CAwEAAQ==',
+                      card_encryption_key_id: 129,
+                    },
+                    callback: (data) => {
+                        console.log("event data: ", data); 
+                        const { target_element } = data;
+                     }
+                });
+            }
+
+            const submitBtn = document.getElementById("submitBtn");
+            submitBtn.addEventListener('click', (e) => {
+                event.preventDefault();
+                const tokenEle = document.getElementById("authToken");
+                console.log("token: ", tokenEle.value.trim());
+                if(widget) {
+                    widget.pay({
+                        transactionToken: tokenEle.value.trim(),
+                        redirect_type: "SAME_TAB | NEW_TAB",
+                        // callback: (status) => {},
+                        redirectUrl: '',
+                    })
+                }
+            })
+            
+        };
+    </script>
+  </html>
