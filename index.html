@@ -28,9 +28,9 @@
             // Now you can use the widget, for example, call a method or update its config
             if (widget) {
                 widget.init({
-                    layout_config: {
-                        form_id: 'myForm',
-                        iframe_containers: {
+                    layoutConfig: {
+                        formId: 'myForm',
+                        iframeContainers: {
                           card_number: {
                             container: '.card_number',
                             attributes: {
@@ -79,11 +79,11 @@
                           },
                         }
                     },
-                    customer_config: {
-                      data_token: "abcd", 
+                    customerConfig: {
+                      dataToken: "abcd", 
                     //   card_encryption_key: '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiNAFc6D1Fv/rCzYCwuzR\nBuj20geAo5pfK7ZwSTkiVl31J8FD+uI5QjNPHoHpcn09TFw1cohkRCaYkcwxJswG\nYN7mpMXG09UgXycYUe3wBHEp/BPpFUKLIFldz4+8O+/xaIpZ1kI70dYT7HAIh0JN\nmc5M91cbluUjVVlGMScpMrbKuNvIA4ci11WsFn1q0e87M41k+qmXXyTUVdJTgGpc\narByQpa9oemAESvTWj2i54jsfjuV+LvvjMcc9oBKkFkHFJx2A/r8pm2G0bmG9IYc\n+TD2CW9tpfoBdsBf5O1G4FckhLy3G8HyilCz5mniR9MwRViNoGtChZXQLMAW2cng\nkQIDAQAB\n-----END PUBLIC KEY-----',
-                        card_encryption_key: 'MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmj6Bri6mSOKz0gH7n+X4K5Thi9Jpqr71Kk1flA+V4+q0JxuMbNJRh9TR+6JMZiLCwyMerktUPPc7DCre48Ja9g3IUDSMpUZx1OATw00sNOazGzf/72xRS4vpEMhCMXJl31SR/nmbCS0p0qj1WR8ZKyh4QUOEkh/0OCqy6rqxjq1lJE/Heiz9O9Rk70WqsyU5gb7M5Xeng7ZlTT3OpPqgpzs6kue7azLjE3Rq3e178coib9Jo9eOsRX+LrAkaaY0bD05ur/08QTnEujFjbrc7rd4mZAU27QedkEAnLsPbBe9RikRtZSWfOCEGOMzAj5/vz40Xl4gg/MiFIv6cn4IBYFTYYL08h83wyX0BlSAisKRc9e1gea64EGBz/BBWh1f92IFbqRaxyFL5K5fAOhhkT0CehfozIm8XQz6tlgayxqLNSIStLnJtzGhpoWzsYF/uN0BMjPaPxif+sWXZm7en92kWVz2WBFo5uSGTnFM1iJrzpiVC9LUwD5EbQSjxFcYOxAgccHi60FVoGDpdNSJWIb76TBeFclQ1C9gDmEj8RUgxCHqaPJDls5HES2FygS8uB0zUHNdhnmuK0uyv8JbG7H8ZJmIsPXNTRW+u5IOmaskofcOEY8LOZERhhXXsZh4WEKOtL0/zBGfi3uSIl/CpwrNdChqnIsfFLfo9qT1jcB8CAwEAAQ==',
-                      card_encryption_key_id: 129,
+                        cardEncryptionKey: 'MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmj6Bri6mSOKz0gH7n+X4K5Thi9Jpqr71Kk1flA+V4+q0JxuMbNJRh9TR+6JMZiLCwyMerktUPPc7DCre48Ja9g3IUDSMpUZx1OATw00sNOazGzf/72xRS4vpEMhCMXJl31SR/nmbCS0p0qj1WR8ZKyh4QUOEkh/0OCqy6rqxjq1lJE/Heiz9O9Rk70WqsyU5gb7M5Xeng7ZlTT3OpPqgpzs6kue7azLjE3Rq3e178coib9Jo9eOsRX+LrAkaaY0bD05ur/08QTnEujFjbrc7rd4mZAU27QedkEAnLsPbBe9RikRtZSWfOCEGOMzAj5/vz40Xl4gg/MiFIv6cn4IBYFTYYL08h83wyX0BlSAisKRc9e1gea64EGBz/BBWh1f92IFbqRaxyFL5K5fAOhhkT0CehfozIm8XQz6tlgayxqLNSIStLnJtzGhpoWzsYF/uN0BMjPaPxif+sWXZm7en92kWVz2WBFo5uSGTnFM1iJrzpiVC9LUwD5EbQSjxFcYOxAgccHi60FVoGDpdNSJWIb76TBeFclQ1C9gDmEj8RUgxCHqaPJDls5HES2FygS8uB0zUHNdhnmuK0uyv8JbG7H8ZJmIsPXNTRW+u5IOmaskofcOEY8LOZERhhXXsZh4WEKOtL0/zBGfi3uSIl/CpwrNdChqnIsfFLfo9qT1jcB8CAwEAAQ==',
+                      cardEncryptionKeyId: 129,
                     },
                     callback: (data) => {
                         console.log("event data: ", data); 
@@ -99,7 +99,7 @@
                 if(widget) {
                     widget.pay({
                         transactionToken: tokenEle.value.trim(),
-                        redirect_type: "SAME_TAB | NEW_TAB",
+                        redirectType: "SAME_TAB | NEW_TAB",
                         // callback: (status) => {},
                         redirectUrl: '',
                     })
