@@ -1,10 +1,22 @@
 <html>
     <head>
       <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://mercury-t2.phonepe.com frame-src: 'self' https://mercury-t2.phonepe.com"> -->
-      <script type="text/javascript" src="https://mercury-stg.phonepe.com/transact/pay-init"></script>
+      <script type="text/javascript" src="https://mercury-stg.phonepe.com/web-sdk/pay-init"></script>
       <meta name="referrer" content="origin" />
       <!-- </script> -->
       <style type="text/css">
+        /* .card_number {
+          height: 42px;
+        }
+        .card_holder_name {
+          height: 42px;
+        }
+        .card_expiry {
+          height: 42px;
+        }
+        .card_cvv {
+          height: 42px;
+        } */
       </style>
     </head>
     <body>
@@ -30,6 +42,7 @@
                 widget.init({
                     layoutConfig: {
                         formId: 'myForm',
+                        showCardBrandIcon: true, // default value is true
                         iframeContainers: {
                           card_number: {
                             container: '.card_number',
@@ -62,11 +75,13 @@
                             border: '2px solid black',
                             padding: '8px 16px',
                             "border-radius": '4px',
-                            height: '42px',
                           },
                           // common styles
                         //   import fonts ...
                           ".card_number": {
+                            height: '42px',
+                            // "margin-bottom": "16px",
+                            "font-size": "16px",
                           }, 
                           ".card_holder_name": {
                           },
@@ -100,8 +115,10 @@
                     widget.pay({
                         transactionToken: tokenEle.value.trim(),
                         redirectType: "SAME_TAB | NEW_TAB",
-                        // callback: (status) => {},
                         redirectUrl: '',
+                        callback: (data) => {
+                          console.log("pay event data: ", data); 
+                        }
                     })
                 }
             })
