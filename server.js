@@ -16,6 +16,10 @@ fastify.register(fastifyStatic, {
   prefix: '/public/',
 });
 
+fastify.get('/healthcheck', async (request, reply) => {
+  reply.status(200).send({ status: 'success' });
+})
+
 fastify.get('/', async (request, reply) => {
     const filePath = path.join(__dirname, './index.html');
     try {
