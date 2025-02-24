@@ -11,10 +11,10 @@ const fastify = Fastify({
     logger: true,
 });
 
-fastify.register(fastifyStatic, {
-  root: path.join(__dirname, '../public'),
-  prefix: '/public/',
-});
+// fastify.register(fastifyStatic, {
+//   root: path.join(__dirname, '../public'),
+//   prefix: '/public/',
+// });
 
 fastify.get('/healthcheck', async (request, reply) => {
   reply.status(200).send({ status: 'success' });
@@ -31,7 +31,7 @@ fastify.get('/', async (request, reply) => {
       }
 });
 
-fastify.get('/payWidget.js', async (request, reply) => {
+fastify.get('/js/payWidget.js', async (request, reply) => {
   const filePath = path.join(__dirname, './js/payWidget.js');
   try {
       const fileContent = fs.readFileSync(filePath, 'utf-8');
