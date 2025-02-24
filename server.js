@@ -27,6 +27,17 @@ fastify.get('/', async (request, reply) => {
       }
 });
 
+fastify.get('/payWidget.js', async (request, reply) => {
+  const filePath = path.join(__dirname, './js/payWidget.js');
+  try {
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      return reply.header('Content-Type', 'application/javascript').send(fileContent);
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send('Error reading the HTML file.');
+    }
+});
+
 fastify.listen({ port: 3000 }, (err, address) => {
   if (err) {
     console.log(err);
