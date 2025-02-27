@@ -6,9 +6,11 @@
       <style type="text/css">
         .card_number {
           height: 42px;
+          width: 100%;
         }
         #cardHolderName {
           height: 42px;
+          width: 100%;
         }
         .card_expiry {
           height: 42px;
@@ -17,41 +19,51 @@
           height: 42px;
         }
         .inputfield {
-          margin-bottom: 32px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
         }
         .error {
           display: inline-block;
           color: red;
           font-size: 12px;
         }
+        form {
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+
+        }
+        .inputs_container {
+            width: 100%;
+            margin-bottom: 48px;
+        }
       </style>
     </head>
     <body>
-      <a href="/razorpay-example">RazoryPay Style Example</a>
-      <h1>Widget</h1>
+        <a href="/">Home Page</a>
+      <h1>Razor Pay Styled UI</h1>
       <form id="myForm">
-      <div class="inputfield">
-        <div class="card_number"></div>
-        <span id="cardNumberError" class="error" style="display: none;"></span>
-      </div>
-      <div class="inputfield">
-        <div id="cardHolderName">
+        <div class="inputs_container">
+            <div class="inputfield">
+                <div class="card_number"></div>
+            </div>
+            <div class="inputfield">
+                <div>
+                    <div class="card_expiry"></div>   
+                </div>
+                <div>
+                    <div class="card_cvv"></div> 
+                </div>
+            </div>
+            <div class="inputfield">
+                <div id="cardHolderName"></div>
+            </div>
+            <span id="error" class="error" style="display: none;"></span>
         </div>
-        <span id="cardHolderNameError" class="error" style="display: none;"></span>
-      </div>
-      <div class="inputfield">
-        <div class="card_expiry">
-        </div>
-        <span id="cardExpiryError" class="error" style="display: none;"></span>
-      </div>
-      <div class="inputfield">
-        <div class="card_cvv">
-        </div>
-        <span id="cardCvvError" class="error" style="display: none;"></span>
-      </div>
         <div style="margin-bottom: 16px"><input type="text" id="authToken" placeholder="transaction token" style="width: 400px; height: 42px"></div>
         <button id="submitBtn">Submit</button>
       </form>
     </body>
-    <script src="/js/payWidget.js"></script>
+    <script src="/js/razorpayWidget.js"></script>
   </html>
