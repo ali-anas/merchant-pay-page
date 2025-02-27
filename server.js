@@ -1,20 +1,10 @@
-// src/server.ts
-// import Fastify from 'fastify';
-// import fs from 'fs';
-// import path from 'path';
 const Fastify = require("fastify");
 const path = require("path");
 const fs = require('fs');
-const fastifyStatic = require("@fastify/static");
 
 const fastify = Fastify({
     logger: true,
 });
-
-// fastify.register(fastifyStatic, {
-//   root: path.join(__dirname, '../public'),
-//   prefix: '/public/',
-// });
 
 fastify.get('/healthcheck', async (request, reply) => {
   reply.status(200).send({ status: 'success' });

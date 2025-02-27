@@ -4,16 +4,50 @@
       <script type="text/javascript" src="https://mercury-stg.phonepe.com/web-sdk/pay-init"></script>
       <meta name="referrer" content="origin" />
       <style type="text/css">
+        .card_number {
+          height: 42px;
+        }
+        #cardHolderName {
+          height: 42px;
+        }
+        .card_expiry {
+          height: 42px;
+        }
+        .card_cvv {
+          height: 42px;
+        }
+        .inputfield {
+          margin-bottom: 32px;
+        }
+        .error {
+          display: inline-block;
+          color: red;
+          font-size: 12px;
+        }
       </style>
     </head>
     <body>
       <h1>Widget</h1>
       <form id="myForm">
-        <div class="card_number">
+      <div class="inputfield">
+        <div class="card_number"></div>
+        <span id="cardNumberError" class="error" style="display: none;"></span>
+      </div>
+      <div class="inputfield">
+        <div id="cardHolderName">
         </div>
-        <div id="cardHolderName"></div>
-        <div class="card_expiry"></div>
-        <div class="card_cvv"></div>
+        <span id="cardHolderNameError" class="error" style="display: none;"></span>
+      </div>
+      <div class="inputfield">
+        <div class="card_expiry">
+        </div>
+        <span id="cardExpiryError" class="error" style="display: none;"></span>
+      </div>
+      <div class="inputfield">
+        <div class="card_cvv">
+        </div>
+        <span id="cardCvvError" class="error" style="display: none;"></span>
+      </div>
         <div style="margin-bottom: 16px"><input type="text" id="authToken" placeholder="transaction token" style="width: 400px; height: 42px"></div>
         <button id="submitBtn">Submit</button>
       </form>

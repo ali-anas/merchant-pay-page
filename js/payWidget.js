@@ -1,3 +1,10 @@
+const errorMapFieldToId = {
+  cardNumber: 'cardNumberError', 
+  cardHolderName: 'cardHolderNameError',
+  cardExpiry: 'cardExpiryError',
+  cardCvv: 'cardCvvError'
+};
+
 window.onload = () => {
     console.log("PARENT ORIGIN: ", window.location)
     // Access the global widget instance
@@ -8,7 +15,7 @@ window.onload = () => {
         widget.init({
             layoutConfig: {
                 formId: 'myForm',
-                showCardBrandIcon: true, // default value is true
+                showCardBrandIcon: false, // default value is true
                 iframeContainers: {
                   cardNumber: {
                     container: '.card_number',
@@ -25,7 +32,7 @@ window.onload = () => {
                   cardExpiry: {
                     container: '.card_expiry',
                     attributes: {
-                      placeholder: "MM/YY",
+                      placeholder: "MM / YY",
                     }
                   },
                   cardCvv: { 
@@ -38,16 +45,14 @@ window.onload = () => {
                 styles: {
                   "input": {
                     outline: 'none',
-                    border: '2px solid black',
+                    border: '1px solid black',
                     padding: '8px 16px',
                     "border-radius": '4px',
+                    "max-width": "320px"
                   },
                   // common styles
                 //   import fonts ...
                   ".cardNumber": {
-                    height: '42px',
-                    // "margin-bottom": "16px",
-                    "font-size": "16px",
                   }, 
                   ".cardHolderName": {
                   },
@@ -66,7 +71,20 @@ window.onload = () => {
             },
             callback: (data) => {
                 console.log("event data: ", data); 
-                const { target_element } = data;
+                const { currentElement, type: eventType, valid, message } = data.currentEventData;
+
+                // handle errors on blur event
+                if (eventType === 'blur') {
+                  const fieldHasError = !valid && message;
+                  if (fieldHasError) {
+                    const errorElement = document.getElementById(errorMapFieldToId[currentElement]);
+                    errorElement.style.display = 'block';
+                    errorElement.innerText = message;
+                  }
+                } else {
+                    const errorElement = document.getElementById(errorMapFieldToId[currentElement]);
+                    errorElement.style.display = 'none';
+                }
              }
         });
     }
@@ -80,7 +98,9 @@ window.onload = () => {
                 transactionToken: tokenEle.value.trim(),
                 redirectUrl: 'https://www.phonepe.com/',
                 callback: (data) => {
-                  console.log("pay event data: ", data); 
+                  if(data.redirectUrl) {
+                    window.location = data.redirectUrl;
+                  }
                 }
             })
         }
