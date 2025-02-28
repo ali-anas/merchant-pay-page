@@ -22,7 +22,7 @@ fastify.get('/', async (request, reply) => {
 });
 
 fastify.get('/razorpay-example', async (request, reply) => {
-  const filePath = path.join(__dirname, './razorpay.html');
+  const filePath = path.join(__dirname, './razorpay-example/index.html');
   try {
       const htmlContent = fs.readFileSync(filePath, 'utf-8');
       return reply.type('text/html').send(htmlContent);
