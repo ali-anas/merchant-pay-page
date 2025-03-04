@@ -32,6 +32,17 @@ fastify.get('/razorpay-example', async (request, reply) => {
     }
 });
 
+fastify.get('/card-example', async (request, reply) => {
+  const filePath = path.join(__dirname, './card-example/index.html');
+  try {
+      const htmlContent = fs.readFileSync(filePath, 'utf-8');
+      return reply.type('text/html').send(htmlContent);
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send('Error reading the HTML file.');
+    }
+});
+
 fastify.get('/js/payWidget.js', async (request, reply) => {
   const filePath = path.join(__dirname, './js/payWidget.js');
   try {
@@ -46,6 +57,17 @@ fastify.get('/js/payWidget.js', async (request, reply) => {
 // /js/razorpayWidget.js
 fastify.get('/js/razorpayWidget.js', async (request, reply) => {
   const filePath = path.join(__dirname, './js/razorpayWidget.js');
+  try {
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      return reply.header('Content-Type', 'application/javascript').send(fileContent);
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send('Error reading the HTML file.');
+    }
+});
+
+fastify.get('/js/cardExample.js', async (request, reply) => {
+  const filePath = path.join(__dirname, './js/cardExample.js');
   try {
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       return reply.header('Content-Type', 'application/javascript').send(fileContent);

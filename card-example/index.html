@@ -1,0 +1,176 @@
+<html>
+    <head>
+      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://mercury-stg.phonepe.com frame-src: 'self' https://mercury-stg.phonepe.com">
+      <script type="text/javascript" src="https://mercury-stg.phonepe.com/web-sdk/pay-init"></script>
+      <meta name="referrer" content="origin" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+      <!-- <link rel="stylesheet" href="./css/styles.css"/> -->
+      <style type="text/css">
+        .inputfield {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            height: 2rem;
+        }
+        .error {
+          display: inline-block;
+          color: red;
+          font-size: 12px;
+        }
+        form {
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+
+        }
+        .inputs_container {
+            width: 100%;
+            margin-bottom: 48px;
+        }
+
+        .card .card__type {
+            position: relative;
+            background: url(../img/cards-logo.png) no-repeat;
+            background-position: right;
+            display: block;
+            width: auto;
+            height: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            position: relative;
+            width: 28.75rem;
+            min-height: 18rem;
+            /* green dark - #076257 */
+            /* light green - #4eb28a */
+            /* blue - #1060ff */
+            /* pink -  #9a3162 */
+            /* background: url(../img/chip.png) no-repeat 1.4rem 6.5rem; */
+            /* background-color: #1b1b6f; */
+            /* background-color: #232325; */
+            /* background-image: linear-gradient("to right", "#343435", "#232325"); */
+            /* lighter */
+            /* background-image: linear-gradient(to bottom right, #4a4a4d, #6e6e72); */
+            /* darker1 */
+            /* background-image: linear-gradient(to bottom right, #2a2a2d, #4e4e52);
+            /* blue grey 2 */
+            background-image: linear-gradient(to bottom right, #232325, #14a0a0);
+            padding: 1rem 1.5rem 0 1.5rem;
+            margin: 0.5rem auto;
+            border-radius: 0.75rem;
+            box-shadow: 3px 3px 1rem 0 rgba(0, 0, 0, 0.1);
+
+            /* dark 2 */
+            /* background-image: linear-gradient(to bottom right, #343435, #232325); */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            /* lighter */
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            /* background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent); */
+            pointer-events: none;
+            /* darker 1 */
+            /* background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent); */
+            /* blue grey */
+            background-image: radial-gradient(circle, rgba(180, 180, 255, 0.15), transparent);
+            /* dark 2 */
+            /* background-image: radial-gradient(circle, rgba(200, 200, 200, 0.12), transparent); */
+        }
+
+        .card__field--number {
+            margin-bottom: 0.825rem;
+        }
+
+        .card__field--expiry {
+            padding-right: 2rem;
+        }
+
+        .card-cvv-expiry {
+            margin-bottom: 0.625rem;
+            height: 3rem;
+        }
+
+        .card__field--label{
+            font-family: "Inter", sans-serif;
+            color: white;
+            font-size: 0.875rem;
+        }
+
+
+        
+      </style>
+    </head>
+    <body>
+    <a href="/">Home Page</a>
+      <h1>Card Styled UI</h1>
+      <div class="container">
+        <section class="card">
+    
+            <form class="card__form" id="card-form">
+                <section class="card__type"></section>
+    
+                <!-- <label class="card__field--label" for="card-pan">Card number</label> -->
+                <section id="card-number" class="inputfield card__field--number"></section>
+    
+                <section class="inputfield card-cvv-expiry">
+                    <section class="first">
+                        <label class="card__field--label" for="card-expiry">Expiry date</label>
+                        <section id="card-expiry" class="card__field card__field--expiry"></section>
+                    </section>
+                    <section class="last">
+                        <label class="card__field--label" for="card-cvv">CVV</label>
+                        <section id="card-cvv" class="card__field card__field--cvv"></section>
+                    </section>
+                </section>
+
+                <!-- <label fclass="card__field--label" for="card-holder-name">Card Holder name</label> -->
+                <section id="card-holder-name" class="inputfield card__field--name"></section>
+                
+               
+            </form>
+            
+        </section>
+        <button id="card-submit" class="card__submit" type="submit">Pay Now</button>
+        <button id="clear" class="clear">Clear</button>
+    </div>
+    </body>
+    <script src="../js/cardExample.js"></script>
+  </html>
+
+
+  <meta charset="utf-8"></meta>
+  <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"></meta>
+  <meta content="width=device-width, initial-scale=1" name="viewport"></meta>
+  <meta content="nofollow, noindex" name="robots"></meta>
+
+<!-- 
+  iframe style - 
+  border: none;
+    width: 100%;
+    height: 100%;
+    float: left;
+
+scrolling=no
+   -->
+
+  <!-- 
+
+    <!DOCTYPE html>
+  <html lang="en">
+  aria-label="field name"
+  aria-required=true
+  aria-invalid=true/false,
+
+  class="is-invalid"
+  class="is-onfocus"
+  -->
