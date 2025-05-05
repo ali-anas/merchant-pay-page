@@ -10,7 +10,6 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
           widget.init({
               layoutConfig: {
                   formId: 'myForm',
-                  showCardBrandIcon: false, // default value is true
                   iframeContainers: {
                     cardNumber: {
                       container: '.card_number',
@@ -50,6 +49,7 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
                     ".cardNumber": {
                         "border-top-left-radius": "4px",
                         "border-top-right-radius": "4px",
+                        width: "420px",
                     }, 
                     ".cardHolderName": {
                         "border-bottom-left-radius": "4px",
@@ -68,9 +68,8 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
                     },
                   }
               },
-              customerConfig: {
-                cardEncryptionKey: 'MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmj6Bri6mSOKz0gH7n+X4K5Thi9Jpqr71Kk1flA+V4+q0JxuMbNJRh9TR+6JMZiLCwyMerktUPPc7DCre48Ja9g3IUDSMpUZx1OATw00sNOazGzf/72xRS4vpEMhCMXJl31SR/nmbCS0p0qj1WR8ZKyh4QUOEkh/0OCqy6rqxjq1lJE/Heiz9O9Rk70WqsyU5gb7M5Xeng7ZlTT3OpPqgpzs6kue7azLjE3Rq3e178coib9Jo9eOsRX+LrAkaaY0bD05ur/08QTnEujFjbrc7rd4mZAU27QedkEAnLsPbBe9RikRtZSWfOCEGOMzAj5/vz40Xl4gg/MiFIv6cn4IBYFTYYL08h83wyX0BlSAisKRc9e1gea64EGBz/BBWh1f92IFbqRaxyFL5K5fAOhhkT0CehfozIm8XQz6tlgayxqLNSIStLnJtzGhpoWzsYF/uN0BMjPaPxif+sWXZm7en92kWVz2WBFo5uSGTnFM1iJrzpiVC9LUwD5EbQSjxFcYOxAgccHi60FVoGDpdNSJWIb76TBeFclQ1C9gDmEj8RUgxCHqaPJDls5HES2FygS8uB0zUHNdhnmuK0uyv8JbG7H8ZJmIsPXNTRW+u5IOmaskofcOEY8LOZERhhXXsZh4WEKOtL0/zBGfi3uSIl/CpwrNdChqnIsfFLfo9qT1jcB8CAwEAAQ==',
-                cardEncryptionKeyId: 129,
+              merchantDetailsConfig: {
+                merchantId: "SWIGGY8",
               },
               callback: (data) => {
                   console.log("event data: ", data); 
@@ -107,7 +106,6 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
           if(widget) {
               widget.pay({
                   transactionToken: tokenEle.value.trim(),
-                  redirectUrl: 'https://www.phonepe.com/',
                   callback: (data) => {
                     if(data.redirectUrl) {
                       window.location = data.redirectUrl;
