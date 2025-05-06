@@ -1,9 +1,11 @@
 const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
   
   window.onload = () => {
-      console.log("PARENT ORIGIN: ", window.location)
       // Access the global widget instance
+      console.log("widget loaded");
       const widget = window.PhonepeWidget;
+      const submitBtn = document.getElementById("pay-btn");
+      submitBtn.disabled = true;
   
       // Now you can use the widget, for example, call a method or update its config
       if (widget) {
@@ -68,6 +70,10 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
                     },
                     "input::placeholder": {
                         color: "#FFF5EE60",
+                    },
+                    ".isInvalid": {
+                      "border-bottom": "1px solid red",
+                      color: "red"
                     }
                   }
               },
@@ -78,13 +84,28 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
                   console.log("event data: ", data); 
                   const { currentElement, type: eventType, valid, message } = data.currentEventData;
 
+
+                  if(eventType === "input") {
+                    let isFormValid = true;
+                    fieldsOrder.forEach(field => {
+                      isFormValid = isFormValid && data.cardFieldsState[field]?.valid
+                    })
+                    if (isFormValid) {
+                      submitBtn.disabled = false;
+                    } else {
+                      submitBtn.disabled = true;
+                    }
+                  }
+
   
                   // handle errors on blur event
                   if (eventType === 'blur') {
                     let error = "";
+                    
                     const fieldWithError = fieldsOrder.find(
                         field => data.cardFieldsState[field]?.message
                     );
+                    
                     
                     if (fieldWithError) {
                         error = data.cardFieldsState[fieldWithError].message;
@@ -101,8 +122,7 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
                }
           });
       }
-  
-      const submitBtn = document.getElementById("card-submit");
+
       submitBtn.addEventListener('click', (e) => {
           e.preventDefault();
           const tokenEle = document.getElementById("authToken");
