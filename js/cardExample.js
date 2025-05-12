@@ -82,7 +82,7 @@ const fieldsOrder  = ['cardNumber', 'cardExpiry', 'cardCvv', 'cardHolderName'];
               },
               callback: (data) => {
                   console.log("event data: ", data); 
-                  const { currentElement, type: eventType, valid, message } = data.currentEventData;
+                  const { currentElement, type: eventType, valid, message } = data?.currentEventData || {};
 
 
                   if(eventType === "input") {

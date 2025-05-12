@@ -21,8 +21,8 @@ fastify.get('/', async (request, reply) => {
       }
 });
 
-fastify.get('/razorpay-example', async (request, reply) => {
-  const filePath = path.join(__dirname, './razorpay-example/index.html');
+fastify.get('/example-2', async (request, reply) => {
+  const filePath = path.join(__dirname, './example-2/index.html');
   try {
       const htmlContent = fs.readFileSync(filePath, 'utf-8');
       return reply.type('text/html').send(htmlContent);
@@ -55,8 +55,8 @@ fastify.get('/js/payWidget.js', async (request, reply) => {
 });
 
 // /js/razorpayWidget.js
-fastify.get('/js/razorpayWidget.js', async (request, reply) => {
-  const filePath = path.join(__dirname, './js/razorpayWidget.js');
+fastify.get('/js/example-2.js', async (request, reply) => {
+  const filePath = path.join(__dirname, './js/example-2.js');
   try {
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       return reply.header('Content-Type', 'application/javascript').send(fileContent);

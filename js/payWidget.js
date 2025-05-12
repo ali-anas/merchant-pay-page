@@ -17,7 +17,7 @@ window.onload = () => {
                 formId: 'myForm',
                 iframeContainers: {
                   cardNumber: {
-                    container: '.card_number',
+                    container: '#cardNumberDiv',
                     attributes: {
                       placeholder: "4111 1111 1111 1111",
                       // "aria-label": "Card Number",
@@ -25,21 +25,21 @@ window.onload = () => {
                     }
                   },
                   cardHolderName: {
-                    container: '#cardHolderName',
+                    container: '#cardHolderNameDiv',
                     attributes: {
                       placeholder: "Name on Card",
                       // "aria-label": "Card Holder Name",
                     }
                   },
                   cardExpiry: {
-                    container: '.card_expiry',
+                    container: '#cardExpiryDiv',
                     attributes: {
                       placeholder: "MM / YY",
                       // "aria-label": "Card Expiry Date",
                     }
                   },
                   cardCvv: { 
-                    container: '.card_cvv',
+                    container: '#cardCvvDiv',
                     attributes: {
                       placeholder: "CVV",
                     }
@@ -78,7 +78,7 @@ window.onload = () => {
             },
             callback: (data) => {
                 console.log("event data: ", data); 
-                const { currentElement, type: eventType, valid, message } = data.currentEventData;
+                const { currentElement, type: eventType, valid, message } = data?.currentEventData || {};
 
                 // handle errors on blur event
                 if (eventType === 'blur') {

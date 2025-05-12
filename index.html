@@ -6,16 +6,16 @@
       <meta name="referrer" content="origin" />
       <meta content="width=device-width, initial-scale=1" name="viewport"></meta>
       <style type="text/css">
-        .card_number {
+        #cardNumberDiv {
           height: 42px;
         }
-        #cardHolderName {
+        #cardHolderNameDiv {
           height: 42px;
         }
-        .card_expiry {
+        #cardExpiryDiv {
           height: 42px;
         }
-        .card_cvv {
+        #cardCvvDiv {
           height: 42px;
         }
         .inputfield {
@@ -32,26 +32,26 @@
       </style>
     </head>
     <body>
-      <a href="/razorpay-example">RazoryPay Style Example</a>
+      <a href="/example-2">Single Box Example</a>
       <a href="/card-example">Card Example</a>
       <h1>Widget</h1>
       <form id="myForm">
       <div class="inputfield">
-        <div class="card_number"></div>
+        <div id="cardNumberDiv"></div>
         <span id="cardNumberError" class="error" style="display: none;"></span>
       </div>
       <div class="inputfield">
-        <div id="cardHolderName">
+        <div id="cardHolderNameDiv">
         </div>
         <span id="cardHolderNameError" class="error" style="display: none;"></span>
       </div>
       <div class="inputfield">
-        <div class="card_expiry">
+        <div id="cardExpiryDiv">
         </div>
         <span id="cardExpiryError" class="error" style="display: none;"></span>
       </div>
       <div class="inputfield">
-        <div class="card_cvv">
+        <div id="cardCvvDiv">
         </div>
         <span id="cardCvvError" class="error" style="display: none;"></span>
       </div>
