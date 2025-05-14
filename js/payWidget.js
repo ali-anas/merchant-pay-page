@@ -1,3 +1,5 @@
+import { createOrder, getOlympusToken } from "./apiHelpers";
+
 const errorMapFieldToId = {
   cardNumber: 'cardNumberError', 
   cardHolderName: 'cardHolderNameError',
@@ -95,10 +97,14 @@ window.onload = () => {
     const submitBtn = document.getElementById("submitBtn");
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const tokenEle = document.getElementById("authToken");
         if(widget) {
-            widget.pay({
-                transactionToken: tokenEle.value.trim(),
+          getOlympusToken()
+          .then(response => {
+            createOrder(response.token)
+            .then(orderResponse => {
+              console.log("order response: ", orderResponse);
+              widget.pay({
+                transactionToken: orderResponse.token,
                 callback: (data) => {
                   console.log("data: ", data);
                   if(data.redirectUrl) {
@@ -106,6 +112,9 @@ window.onload = () => {
                   }
                 }
             })
+            })
+          })
+          .catch(err => console.error("error fetching token: ", error))
         }
     })
 };
