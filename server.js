@@ -21,7 +21,7 @@ fastify.get('/', async (request, reply) => {
     }
 });
 
-fastify.get("/status", async (request, reply) => {
+fastify.get("/status-screen", async (request, reply) => {
   const statusPageFile = path.join(__dirname, "./html/status.html");
   try {
     const statusPageHtmlContent = fs.readFileSync(statusPageFile, 'utf-8');
