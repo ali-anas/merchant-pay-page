@@ -6,7 +6,6 @@ const errorMapFieldToId = {
 };
 
 window.onload = () => {
-    console.log("PARENT ORIGIN: ", window.location)
     // Access the global widget instance
     const widget = window.PhonepeWidget;
 
@@ -72,9 +71,6 @@ window.onload = () => {
                     border: "1px solid red",
                   }
                 }
-            },
-            merchantDetailsConfig: {
-              merchantId: "SWIGGY8",
             },
             callback: (data) => {
                 console.log("event data: ", data); 

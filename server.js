@@ -11,15 +11,37 @@ fastify.get('/healthcheck', async (request, reply) => {
 })
 
 fastify.get('/', async (request, reply) => {
-    const filePath = path.join(__dirname, './index.html');
-    try {
-        const htmlContent = fs.readFileSync(filePath, 'utf-8');
-        return reply.type('text/html').send(htmlContent);
-      } catch (error) {
-        console.error(error);
-        return reply.status(500).send('Error reading the HTML file.');
-      }
+  const filePath = path.join(__dirname, './index.html');
+  try {
+      const htmlContent = fs.readFileSync(filePath, 'utf-8');
+      return reply.type('text/html').send(htmlContent);
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send('Error reading the HTML file.');
+    }
 });
+
+fastify.get("/status", async (request, reply) => {
+  const statusPageFile = path.join(__dirname, "./html/status.html");
+  try {
+    const statusPageHtmlContent = fs.readFileSync(statusPageFile, 'utf-8');
+    return reply.type('text/html').send(statusPageHtmlContent);
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send('Error reading the HTML status file.');
+    }
+})
+
+fastify.get("/js/status.js", async (request, reply) => {
+  const statusPageFile = path.join(__dirname, "./js/status.js");
+  try {
+    const statusPageScript = fs.readFileSync(statusPageFile, 'utf-8');
+    return reply.header('Content-Type', 'application/javascript').send(statusPageScript);
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send('Error reading the status js file.');
+    }
+})
 
 fastify.get('/example-2', async (request, reply) => {
   const filePath = path.join(__dirname, './example-2/index.html');
@@ -74,6 +96,17 @@ fastify.get('/js/cardExample.js', async (request, reply) => {
     } catch (error) {
       console.error(error);
       return reply.status(500).send('Error reading the HTML file.');
+    }
+});
+
+fastify.get('/js/apiHelpers', async (request, reply) => {
+  const filePath = path.join(__dirname, './js/apiHelpers.js');
+  try {
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      return reply.header('Content-Type', 'application/javascript').send(fileContent);
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send('Error reading the apiHelpers.js file.');
     }
 });
 
