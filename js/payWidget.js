@@ -1,7 +1,7 @@
-const defaultClientId = "SWIGGY8_123";
-const defaultClientCred = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCJVrpuLL8drSOGo5N3s89e8gwakggT1S9BaAtZQgDaE3h1szlWIGvLNuNN1UwoiZK7u37wgHbOJj21xAX5eOZ4iHCbXmoTiWmCLVys9Kw21MeZYV5Rx2tDtIsSZdb7nop7cD48H1GkbIy3OGqGXEUgWjYiAI7pvuhu8ukAWPHy005yLfnZg84sOVb1cBRb31TK0JGSy9mTTKZ48A1c0CFnVLCIwlbTtRxDn1PmpowBXGjtOtSaWrF7WPwUzUowHioB7hJaGRdSpq24jXnIsTmjrC1cVNQYGhJYUrKV50klDqVBLU57t7l1kOcrpWftLIwf15ZMeShsk5Aveb/S6ndJAgMBAAECggEAIy9a99ry45F15oqFv0cLu5FbVHtRInOdda5IKgfk2/ndBJpz+AK6Wwem2EvrBP+p3fq9HLRsu4fEi4q61R0KPpsF7mgT2Ql9RGKGubC9ZhbBRCRT27OxYVkhwAbjOvd1Fwa8iv6jFfLRYidL8zw0YYN7Ft75vhyww6vr0bD323OzES4jYTOGtAvpcTJbry4N13RauizRIVNeCZRe9KTZRFedfazj0nCYc1IxwqeuqjVdzgIAsUwioXJqlyZF24+qTlF2Uws/dZEr0gIPNHNfW2MaaaygMJmUzT/bO2eYQBMvKu83OOvS69C1DWO+hNT/28jTcHmsmrFR6WszMIJL4QKBgQDFs6zh4DN1OciFhM9Tx+92mJBOYJQvb4YBOPs5QNPlW87RyrPhlNw+48QixeZ/fhyIHBD94hW9yhVXGFvKQKME098nsMMp2Qt6/8+g8l8E2DEtSoS8XKXkm3q/Ze5V2mF8uXnhqENIsvXB+56MZqnobvdnywSViOMjQihQyuhFZQKBgQCx1k1OQ43DtthqSosmGcAJiUdlOEMkHWzw3IIR94Rc1rlJPU21/sWrlBVMMacNy40W9Dwf6rmQOeyFhcbWirwpRDNgyfDM/HKmZjH7Qe1F3C8xw3UCF9Md3jG/mivxMVBQiW7m5IvVACY3e5RiFpKrPdcymkLCk7Qi94wYdlhOFQKBgQCBs12hFghMSKtfxQCLc2iLQo2xjbTJ5f1hAfP23KvnFbL6eWRHgvR3IdAEDBcq3x5ywQ74sIEY8OHNMMLPTlZkjWciT9nJs4XPnNGnQjrKH9crYm7wcEu5TbNaq9GPa2R3gesO+uehYx7Ns3iRnaysO1h+NHd+br6s2/M9BdEZ7QKBgE43CtkZLQifKp/VGU4wlR2cmyIRlLYVmwx0b2CnlDeg2O01YTBiVV4ZSySv0eFnXS5zTN5cxjCAyV4QcFt7uTYNIOu45YfCoEo/OExhupG3PaqNZLD++YNxbj/u9tSl88T4LSav7jBIWIaee6yIcQmPsU44OpSJkfivF5bKthvhAoGBAK3B11f9APwE1C9q4p+af23lSYPo8UL1EUwZ8jINS8uEmf4Rbe6/VXKxJoBLRDtL1GQQ05D2M7JnAUxIqBcQOlKzqtJkl/NwZA5oUYUVW6LsEx4WHaXF7uiw1IXw4YRytdo5gX45/oAG7FwCmAyZnNFSwPrHoGY6IcLUG26bVgoe";
+const defaultClientId = "";
+const defaultClientCred = "";
 
-export async function getOlympusToken(clientInfo) {
+async function getOlympusToken(clientInfo) {
     const { clientId = defaultClientId, clientCred = defaultClientCred } = clientInfo || {};
     const params = new URLSearchParams();
     params.append('client_id', clientId);
@@ -35,7 +35,7 @@ export async function getOlympusToken(clientInfo) {
   }
 
 
-export async function createOrder(token) {
+async function createOrder(token) {
   const orderId = 'MO' + Date.now();
 
     const options = {
@@ -176,26 +176,37 @@ window.onload = () => {
     }
 
     const submitBtn = document.getElementById("submitBtn");
+    const tokenElement = document.getElementById("authToken");
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         if(widget) {
-          getOlympusToken()
-          .then(response => {
-            createOrder(response.token)
-            .then(orderResponse => {
-              console.log("order response: ", orderResponse);
-              widget.pay({
-                transactionToken: orderResponse.token,
-                callback: (data) => {
-                  console.log("data: ", data);
-                  if(data.redirectUrl) {
-                    window.location = data.redirectUrl;
-                  }
-                }
-            })
-            })
-          })
-          .catch(err => console.error("error fetching token: ", error))
+
+          widget.pay({
+            transactionToken: tokenElement.value.trim(),
+            callback: (data) => {
+              console.log("data: ", data);
+              if(data.redirectUrl) {
+                window.location = data.redirectUrl;
+              }
+            }
+        })
+          // getOlympusToken()
+          // .then(response => {
+          //   createOrder(response.token)
+          //   .then(orderResponse => {
+          //     console.log("order response: ", orderResponse);
+          //     widget.pay({
+          //       transactionToken: orderResponse.token,
+          //       callback: (data) => {
+          //         console.log("data: ", data);
+          //         if(data.redirectUrl) {
+          //           window.location = data.redirectUrl;
+          //         }
+          //       }
+          //   })
+          //   })
+          // })
+          // .catch(err => console.error("error fetching token: ", error))
         }
     })
 };
