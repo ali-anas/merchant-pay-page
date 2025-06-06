@@ -185,12 +185,12 @@ window.onload = () => {
           widget.pay({
             transactionToken: tokenElement.value.trim(),
             callback: (data) => {
-              const parsedData =  typeof data === "string" ? JSON.parse(data) : data;
-              if(parsedData.redirectUrl) {
+              console.log("data: ", data);
+              if(data.redirectUrl) {
                 window.location = data.redirectUrl;
-              } else if (parsedData.code && parsedData.code >= 400) {
+              } else if (data.statusCode && data.statusCode >= 400) {
                   apiErrorElement.style.display = 'block';
-                  apiErrorElement.innerText = parsedData.message;
+                  apiErrorElement.innerText = data.message;
               }
             }
         })
