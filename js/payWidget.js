@@ -177,16 +177,20 @@ window.onload = () => {
 
     const submitBtn = document.getElementById("submitBtn");
     const tokenElement = document.getElementById("authToken");
+    const apiErrorElement = document.getElementById("payApiError");
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         if(widget) {
-
+          apiErrorElement.style.display = 'none';
           widget.pay({
             transactionToken: tokenElement.value.trim(),
             callback: (data) => {
-              console.log("data: ", data);
-              if(data.redirectUrl) {
+              const parsedData =  typeof data === "string" ? JSON.parse(data) : data;
+              if(parsedData.redirectUrl) {
                 window.location = data.redirectUrl;
+              } else if (parsedData.code && parsedData.code >= 400) {
+                  apiErrorElement.style.display = 'block';
+                  apiErrorElement.innerText = parsedData.message;
               }
             }
         })

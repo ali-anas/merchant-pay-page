@@ -29,6 +29,9 @@
           color: red;
           font-size: 12px;
         }
+        #submitBtn {
+          margin-top: 28px;
+        }
       </style>
     </head>
     <body>
@@ -56,6 +59,8 @@
         <span id="cardCvvError" class="error" style="display: none;"></span>
       </div>
         <div style="margin-bottom: 16px"><input type="text" id="authToken" placeholder="transaction token" style="width: 400px; height: 42px"></div>
+
+        <span id="payApiError" class="error" style="display: none;"></span>
         <button id="submitBtn">Submit</button>
       </form>
     </body>
